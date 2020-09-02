@@ -26,7 +26,7 @@ class ModalHelp extends Component {
     );
 
     return (
-      <div className="col-1 offset-11">
+      <div className="col-1 offset-10">
         <Button color="primary" onClick={this.toggle}>
           {this.props.buttonLabel}
           #Help
