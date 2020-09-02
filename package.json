@@ -2,7 +2,7 @@
   "name": "wall",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/hifrcy/The-Wall",
+  "homepage": "https://hifrcy.github.io/The-Wall/",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
