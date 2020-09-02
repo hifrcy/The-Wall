@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/static/css/main.6e448d82.chunk.css",
-    "main.js": "/static/js/main.99b6aaa8.chunk.js",
-    "main.js.map": "/static/js/main.99b6aaa8.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.3bdfda49.js",
-    "runtime-main.js.map": "/static/js/runtime-main.3bdfda49.js.map",
-    "static/css/2.d9ad5f5c.chunk.css": "/static/css/2.d9ad5f5c.chunk.css",
-    "static/js/2.4ddcd08c.chunk.js": "/static/js/2.4ddcd08c.chunk.js",
-    "static/js/2.4ddcd08c.chunk.js.map": "/static/js/2.4ddcd08c.chunk.js.map",
-    "index.html": "/index.html",
-    "precache-manifest.17616e6b74c32ec5ecf1578385bc954a.js": "/precache-manifest.17616e6b74c32ec5ecf1578385bc954a.js",
-    "service-worker.js": "/service-worker.js",
-    "static/css/2.d9ad5f5c.chunk.css.map": "/static/css/2.d9ad5f5c.chunk.css.map",
-    "static/css/main.6e448d82.chunk.css.map": "/static/css/main.6e448d82.chunk.css.map",
-    "static/js/2.4ddcd08c.chunk.js.LICENSE.txt": "/static/js/2.4ddcd08c.chunk.js.LICENSE.txt"
+    "main.css": "/hifrcy/The-Wall/static/css/main.6e448d82.chunk.css",
+    "main.js": "/hifrcy/The-Wall/static/js/main.85e1c8b8.chunk.js",
+    "main.js.map": "/hifrcy/The-Wall/static/js/main.85e1c8b8.chunk.js.map",
+    "runtime-main.js": "/hifrcy/The-Wall/static/js/runtime-main.166d9f6f.js",
+    "runtime-main.js.map": "/hifrcy/The-Wall/static/js/runtime-main.166d9f6f.js.map",
+    "static/css/2.d9ad5f5c.chunk.css": "/hifrcy/The-Wall/static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.4ddcd08c.chunk.js": "/hifrcy/The-Wall/static/js/2.4ddcd08c.chunk.js",
+    "static/js/2.4ddcd08c.chunk.js.map": "/hifrcy/The-Wall/static/js/2.4ddcd08c.chunk.js.map",
+    "index.html": "/hifrcy/The-Wall/index.html",
+    "precache-manifest.68abc07e7e9ead421b443e7d794c876e.js": "/hifrcy/The-Wall/precache-manifest.68abc07e7e9ead421b443e7d794c876e.js",
+    "service-worker.js": "/hifrcy/The-Wall/service-worker.js",
+    "static/css/2.d9ad5f5c.chunk.css.map": "/hifrcy/The-Wall/static/css/2.d9ad5f5c.chunk.css.map",
+    "static/css/main.6e448d82.chunk.css.map": "/hifrcy/The-Wall/static/css/main.6e448d82.chunk.css.map",
+    "static/js/2.4ddcd08c.chunk.js.LICENSE.txt": "/hifrcy/The-Wall/static/js/2.4ddcd08c.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.3bdfda49.js",
+    "static/js/runtime-main.166d9f6f.js",
     "static/css/2.d9ad5f5c.chunk.css",
     "static/js/2.4ddcd08c.chunk.js",
     "static/css/main.6e448d82.chunk.css",
-    "static/js/main.99b6aaa8.chunk.js"
+    "static/js/main.85e1c8b8.chunk.js"
   ]
 }
