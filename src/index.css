@@ -1,7 +1,7 @@
 body {
   width: 100wh;
   height: 100%;
-  color: #fff;
+  color: rgb(63, 63, 63);
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 800%;
   background-attachment: fixed;
