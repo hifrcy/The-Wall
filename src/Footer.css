@@ -1,0 +1,27 @@
+.background {
+  padding: 0;
+}
+
+.img {
+  width: 30%;
+}
+
+.wilders {
+  margin: auto;
+  color: white;
+}
+
+a.link {
+  outline: none;
+  text-decoration: none;
+  padding: 2px 1px 0;
+}
+
+a:link.link {
+  color: #303030;
+}
+
+a:visited.link {
+  color:  #303030;
+  ;
+}

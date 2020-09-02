@@ -1,0 +1,9 @@
+.buttonPosition {
+    text-align: center
+}
+
+.buttonText {
+    text-align: center;
+    font-size: 30px;
+    max-height: 30px;
+}
