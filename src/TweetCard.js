@@ -12,7 +12,7 @@ import {
 const TweetCard = props => {
   return (
     <div>
-      <Container fluid className="p-0">
+      <Container fluid className="p-0" style={{ "color": "dark" }}>
         <Card style={{ maxheight: "100px" }} className="mt-1">
           <CardBody className="pt-2 pb-0">
             <Row>
@@ -44,7 +44,7 @@ const TweetCard = props => {
           <CardBody className="pb-2">
             <Row>
               <Col xs="12">
-                <CardText className="pb-2">{props.message}</CardText>
+                <CardText className="pb-2"  >{props.message}</CardText>
               </Col>
               <Col xs="6">
                 <CardText className="text-center">
