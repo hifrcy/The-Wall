@@ -4,6 +4,10 @@
 
 .buttonText {
     text-align: center;
-    font-size: 30px;
-    max-height: 30px;
+    font-size: 100%;  
+    font-weight: bold;
+    margin:0.4em auto;
+   
+    padding:0.35em 1.2em;
+    display:block
 }

@@ -23,7 +23,7 @@ const HashtagInput = props => {
       <div className="buttonPosition">
         <Button
           href="#titleHashtag"
-          className="w-25 mt-5"
+          className="w-20 mt-5"
           color="primary"
           onClick={() => props.getTweet(props.title)}
         >

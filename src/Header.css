@@ -3,7 +3,12 @@ header {
     font-size:25px;
     
 }
+
 header p{
     margin-top:-20px;
     color: white
+}
+
+img {
+width: 100%;
 }
