@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/hifrcy/The-Wall/static/css/main.bb66bf4a.chunk.css",
+    "main.js": "/hifrcy/The-Wall/static/js/main.034e46fe.chunk.js",
+    "main.js.map": "/hifrcy/The-Wall/static/js/main.034e46fe.chunk.js.map",
+    "runtime-main.js": "/hifrcy/The-Wall/static/js/runtime-main.166d9f6f.js",
+    "runtime-main.js.map": "/hifrcy/The-Wall/static/js/runtime-main.166d9f6f.js.map",
+    "static/css/2.d9ad5f5c.chunk.css": "/hifrcy/The-Wall/static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.4ddcd08c.chunk.js": "/hifrcy/The-Wall/static/js/2.4ddcd08c.chunk.js",
+    "static/js/2.4ddcd08c.chunk.js.map": "/hifrcy/The-Wall/static/js/2.4ddcd08c.chunk.js.map",
+    "index.html": "/hifrcy/The-Wall/index.html",
+    "precache-manifest.da717bd1246913f7f776372fadbace00.js": "/hifrcy/The-Wall/precache-manifest.da717bd1246913f7f776372fadbace00.js",
+    "service-worker.js": "/hifrcy/The-Wall/service-worker.js",
+    "static/css/2.d9ad5f5c.chunk.css.map": "/hifrcy/The-Wall/static/css/2.d9ad5f5c.chunk.css.map",
+    "static/css/main.bb66bf4a.chunk.css.map": "/hifrcy/The-Wall/static/css/main.bb66bf4a.chunk.css.map",
+    "static/js/2.4ddcd08c.chunk.js.LICENSE.txt": "/hifrcy/The-Wall/static/js/2.4ddcd08c.chunk.js.LICENSE.txt"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.166d9f6f.js",
+    "static/css/2.d9ad5f5c.chunk.css",
+    "static/js/2.4ddcd08c.chunk.js",
+    "static/css/main.bb66bf4a.chunk.css",
+    "static/js/main.034e46fe.chunk.js"
+  ]
+}
