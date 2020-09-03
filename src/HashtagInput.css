@@ -1,9 +1,16 @@
 .buttonPosition {
-    text-align: center
+  display: block;
+  margin: auto;
 }
 
 .buttonText {
-    text-align: center;
-    font-size: 30px;
-    max-height: 30px;
+  text-align: center;
+  font-size: 30px;
+  max-height: 30px;
+}
+.load {
+  justify-content: center;
+}
+.logotwitter {
+  width: 60px;
 }

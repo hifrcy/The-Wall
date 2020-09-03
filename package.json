@@ -2,7 +2,7 @@
   "name": "wall",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://github.com/hifrcy/The-Wall",
+  "homepage": "https://github.com/hifrcy/The-Wall", 
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
@@ -12,8 +12,11 @@
     "gh-pages": "^3.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-masonry-component": "^6.2.1",
     "react-scripts": "3.4.3",
-    "reactstrap": "^8.5.1"
+    "react-scrollchor": "^6.0.0",
+    "reactstrap": "^8.5.1",
+    "socket.io-client": "^2.3.0"
   },
   "scripts": {
     "start": "react-scripts start",

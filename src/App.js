@@ -5,12 +5,14 @@ import HashtagInput from "./HashtagInput";
 import Footer from "./Footer";
 import Header from "./Header";
 import TweetCard from "./TweetCard";
+import TweetModal from "./TweetModal";
 import classnames from "classnames";
+import Scrollchor from "react-scrollchor";
+import openSocket from "socket.io-client";
 import {
   Container,
   Row,
   Col,
-  CardColumns,
   Button,
   TabContent,
   TabPane,
@@ -18,22 +20,29 @@ import {
   NavItem,
   NavLink
 } from "reactstrap";
+import Masonry from "react-masonry-component";
+
+const createPost = tweet => {
+  const pictureMedia = tweet.entities.media
+    ? tweet.entities.media[0].media_url
+    : "N/A";
+  return {
+    picture: pictureMedia,
+    message: tweet.text ? tweet.text : tweet.full_text,
+    author: tweet.user.name,
+    logo: tweet.user.profile_image_url,
+    likeNb: tweet.favorite_count,
+    rtNb: tweet.retweet_count,
+    userName: `@${tweet.user.screen_name}`,
+    date: tweet.created_at
+      .split(" ")
+      .splice(0, 4)
+      .join(" ")
+  };
+};
 
 const tweetToPost = tweets => {
-  return tweets.statuses.map(tweet => {
-    const pictureMedia = tweet.entities.media
-      ? tweet.entities.media[0].media_url
-      : "N/A";
-    return {
-      picture: pictureMedia,
-      message: tweet.full_text,
-      author: tweet.user.name,
-      logo: tweet.user.profile_image_url,
-      likeNb: tweet.favorite_count,
-      rtNb: tweet.retweet_count,
-      id: `@${tweet.user.screen_name}`
-    };
-  });
+  return tweets.statuses.map(createPost);
 };
 
 class App extends Component {
@@ -42,28 +51,62 @@ class App extends Component {
     this.state = {
       posts: [],
       postlike: [],
+      postPics: [],
       title: "",
       isTweetPageDisplayed: false,
-      activeTab: "1"
+      isLoading: false,
+      activeTab: "1",
+      selectedTweet: null,
+      modal: false
     };
+    this.newTweets = [];
     this.handleClickNewButton = this.handleClickNewButton.bind(this);
-    this.toggle = this.toggle.bind(this);
+    this.handleTweetToModal = this.handleTweetToModal.bind(this);
+    this.toggleTab = this.toggleTab.bind(this);
+    this.closeModal = this.closeModal.bind(this);
   }
 
   getTweet = hashtag => {
-    fetch(`https://safe-savannah-17783.herokuapp.com/?tag=${hashtag}`)
+    this.setState({
+      isLoading: true
+    });
+    fetch(`http://localhost:5000?tag=${hashtag}`)
       .then(results => results.json()) // conversion du résultat en JSON
       .then(data => {
         this.setState({
           posts: tweetToPost(data),
           postlike: tweetToPost(data),
-          isTweetPageDisplayed: true
+          postPics: tweetToPost(data),
+          isTweetPageDisplayed: true,
+          isLoading: false
+        });
+        this.socket = openSocket("http://localhost:5050");
+
+        console.log("hashtag" + hashtag);
+        this.socket.on(`#${hashtag}`, data => {
+          console.log("data", data);
+          this.newTweets = [createPost(data), ...this.newTweets];
+          console.log("socket", this.newTweets);
+          // this.setState({ posts: newList });
         });
       });
   };
+  componentDidMount() {
+    setInterval(() => {
+      if (this.newTweets.length > 0) {
+        this.newTweets = [...this.newTweets, ...this.state.posts];
+        this.setState({ posts: this.newTweets });
+        console.log("newTweets", this.newTweets);
+      }
 
+      this.newTweets = [];
+
+      //parcourire le tableau newtweets si il a des tweets ajouter newtweets a posts puis vider newtweets
+    }, 3000);
+  }
   handleClickNewButton() {
-    this.setState({ isTweetPageDisplayed: false });
+    this.socket = null;
+    this.setState({ isTweetPageDisplayed: false, title: "", activeTab: "1" });
   }
 
   handleXClick = event => {
@@ -81,12 +124,25 @@ class App extends Component {
     });
   };
 
-  toggle(tab) {
+  handleTweetToModal(tweet) {
+    this.setState({
+      selectedTweet: tweet,
+      modal: !this.state.modal
+    });
+  }
+
+  toggleTab(tab) {
     if (this.state.activeTab !== tab) {
       this.setState({
         activeTab: tab
       });
     }
+  }
+
+  closeModal() {
+    this.setState({
+      modal: false
+    });
   }
 
   render() {
@@ -98,16 +154,17 @@ class App extends Component {
               <Header />
             </Row>
             <Row className="justify-content-center hashtagRow">
-              <Col sm="6">
+              <Col sm={{ size: 6 }}>
                 <HashtagInput
                   title={this.state.title}
                   onInputContent={this.handleInputContent}
                   getTweet={this.getTweet}
                   onXClick={this.handleXClick}
+                  startLoad={this.state.isLoading}
                 />
               </Col>
             </Row>
-
+            <Row />
             <Row className="footerPosition w-100">
               <ModalHelp />
 
@@ -116,23 +173,38 @@ class App extends Component {
           </Container>
         ) : (
           <Container fluid className="tweet" style={{ height: "100vh" }}>
+            {this.state.selectedTweet !== null && (
+              <TweetModal
+                picture={this.state.selectedTweet.picture}
+                author={this.state.selectedTweet.author}
+                userName={this.state.selectedTweet.userName}
+                logo={this.state.selectedTweet.logo}
+                likeNb={this.state.selectedTweet.likeNb}
+                rtNb={this.state.selectedTweet.rtNb}
+                date={this.state.selectedTweet.date}
+                message={this.state.selectedTweet.message}
+                modal={this.state.modal}
+                closeModal={this.closeModal}
+              />
+            )}
+
             <Row id="wallHeader" style={{ color: "white" }}>
-              <h1 id="titleHashtag" className="mt-2">
-                #{this.state.title}
-              </h1>
+              <h1 className="mt-2">#{this.state.title}</h1>
 
               <Button onClick={this.handleClickNewButton} color="primary">
-                <p className="textButton ">#New</p>
+                <p className="textButton">#New</p>
               </Button>
             </Row>
+
             <Nav tabs className="navTabs d-flex justify-content-center">
               <NavItem>
                 <NavLink
-                  className={classnames({
+                  style={{ cursor: "pointer" }}
+                  className={classnames("navlink", {
                     active: this.state.activeTab === "1"
                   })}
                   onClick={() => {
-                    this.toggle("1");
+                    this.toggleTab("1");
                   }}
                 >
                   Tweets
@@ -140,41 +212,116 @@ class App extends Component {
               </NavItem>
               <NavItem>
                 <NavLink
-                  className={classnames({
+                  style={{ cursor: "pointer" }}
+                  className={classnames("navlink", {
                     active: this.state.activeTab === "2"
                   })}
                   onClick={() => {
-                    this.toggle("2");
+                    this.toggleTab("2");
                   }}
                 >
                   Top tweets
                 </NavLink>
               </NavItem>
+              <NavItem>
+                <NavLink
+                  style={{ cursor: "pointer" }}
+                  className={classnames("navlink", {
+                    active: this.state.activeTab === "3"
+                  })}
+                  onClick={() => {
+                    this.toggleTab("3");
+                  }}
+                >
+                  Pictures
+                </NavLink>
+              </NavItem>
             </Nav>
             <TabContent activeTab={this.state.activeTab}>
               <TabPane tabId="1">
-                <CardColumns>
-                  {this.state.posts.map(post => (
-                    <TweetCard {...post} />
+                <Masonry
+                  options={{ fitWidth: true }}
+                  style={{ margin: "auto" }}
+                >
+                  {this.state.posts.map((post, index) => (
+                    <TweetCard
+                      {...post}
+                      tweetToModal={this.handleTweetToModal}
+                      key={index}
+                    />
                   ))}
-                </CardColumns>
+                </Masonry>
+
+                <Scrollchor to="#wallHeader" className="toTheTopLayout">
+                  <img
+                    src="images/arrow-alt-circle-up-regular.svg"
+                    alt="toTheTopp"
+                    className="buttonToTheTop"
+                  />
+                </Scrollchor>
               </TabPane>
               <TabPane tabId="2">
-                <Row className="justify-content-center">
-                  <Col xs={{ size: 4 }}>
-                    {/* <CardDeck style={{ width: "50rem" }}> */}
-                    {this.state.postlike
-                      .sort(function(a, b) {
-                        return a.likeNb - b.likeNb;
-                      })
-                      .reverse()
-                      .map(postTopTweet => <TweetCard {...postTopTweet} />)
-                      .slice(0, 10)}
-                    {/* </CardDeck> */}
-                  </Col>
-                </Row>
+                <Masonry
+                  options={{ fitWidth: true }}
+                  style={{ margin: "auto" }}
+                >
+                  {this.state.postlike
+                    .sort(function(a, b) {
+                      return b.likeNb - a.likeNb;
+                    })
+                    .slice(0, 10)
+                    .map((postTopTweet, index) => (
+                      <TweetCard
+                        {...postTopTweet}
+                        tweetToModal={this.handleTweetToModal}
+                        key={index}
+                      />
+                    ))}
+                </Masonry>
+
+                <Scrollchor to="#wallHeader" className="toTheTopLayout">
+                  <img
+                    src="images/arrow-alt-circle-up-regular.svg"
+                    alt="toTheTopp"
+                    className="buttonToTheTop"
+                  />
+                </Scrollchor>
+              </TabPane>
+              <TabPane tabId="3">
+                <Masonry
+                  options={{ fitWidth: true }}
+                  style={{ margin: "auto" }}
+                >
+                  {this.state.postPics.map(
+                    (postPicsTweet, index) =>
+                      postPicsTweet.picture !== "N/A" && (
+                        <TweetCard
+                          picture={postPicsTweet.picture}
+                          author={postPicsTweet.author}
+                          logo={postPicsTweet.logo}
+                          likeNb={postPicsTweet.likeNb}
+                          rtNb={postPicsTweet.rtNb}
+                          date={postPicsTweet.date}
+                          userName={postPicsTweet.userName}
+                          message={postPicsTweet.message}
+                          tweetToModal={this.handleTweetToModal}
+                          hideText //écris tel quel vaut "true"
+                          key={index}
+                        />
+                      )
+                  )}
+                </Masonry>
+
+                <Scrollchor to="#wallHeader" className="toTheTopLayout">
+                  <img
+                    src="images/arrow-alt-circle-up-regular.svg"
+                    alt="toTheTopp"
+                    className="buttonToTheTop"
+                  />
+                </Scrollchor>
               </TabPane>
             </TabContent>
+            <Footer />
           </Container>
         )}
       </div>

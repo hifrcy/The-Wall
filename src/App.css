@@ -27,10 +27,34 @@
 }
 
 .footerPosition {
-  position: absolute;
+  position: fixed;
   bottom: 0;
 }
 
 .hashtagRow {
   margin-top: 15vh;
+}
+
+.navlink {
+  border-radius: 0.25rem;
+}
+
+.buttonToTheTop {
+  height: 50px;
+  float: right;
+  margin-right: 30px;
+  opacity: 0.5;
+}
+
+.buttonToTheTop:hover {
+  height: 55px;
+  float: right;
+  margin-right: 30px;
+  opacity: 1;
+}
+
+.toTheTopLayout {
+  position: fixed;
+  bottom: 50px;
+  width: 100%;
 }

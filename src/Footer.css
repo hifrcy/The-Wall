@@ -11,17 +11,26 @@
   color: white;
 }
 
-a.link {
-  outline: none;
+/* a:link {
+  color: white;
   text-decoration: none;
-  padding: 2px 1px 0;
 }
 
-a:link.link {
-  color: #303030;
+a:visited {
+  color: white;
+  text-decoration: none;
 }
 
-a:visited.link {
-  color:  #303030;
-  ;
+a:hover {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+} */
+
+.test:hover {
+  color: white;
+}
+
+.test {
+  color: white;
 }
